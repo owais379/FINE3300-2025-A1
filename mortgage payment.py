@@ -1,7 +1,7 @@
 # Part 1: Mortgage payment calculator
 
 class MortgagePayments:
-    #  A class to calculate various mortgage payment options for Canadian fixed-rate mortgages
+    #  A class to calculate various mortgage payment options for canadian fixed-rate mortgages
     
     # Fixed rate mortgages in Canada are quoted as semiannually compounded rates.
     def __init__(self, interest_rate, amortization_period):
@@ -60,9 +60,42 @@ class MortgagePayments:
         return payments_tuple
 
 # testing example from instructions
-mortgage = MortgagePayments(5.5, 25)
-payments = mortgage.payments(100000)
+# mortgage = MortgagePayments(5.5, 25)
+# payments = mortgage.payments(100000)
 
-print(payments)
-# works! matched with instruction numbers
-# result: (610.39, 304.85, 281.38, 140.61, 305.2, 152.6)
+# print(payments)
+# Works! - result: (610.39, 304.85, 281.38, 140.61, 305.2, 152.6)
+
+#Formatted Payments (User Input)
+
+# exeuction of program
+print("FINE 3300: Assignment #1 Part 1: Mortgage Calculator")
+print("-" * 50)
+
+# prompt user for input
+print("\nEnter mortgage details:")
+principal = float(input("Enter the principal amount: 5000"))
+interest_rate = float(input("Enter the quoted interest rate as a percent, e,g --> 4.85: "))
+amortization_years = int(input("Enter the amortization period in years: "))
+
+# calculate mortgage payments
+mortgage = MortgagePayments(interest_rate, amortization_years)
+payments = mortgage.payments(principal)
+
+# format and display output
+print(f"\nMortgage Payment Results:")
+print(f"Monthly Payment: ${payments[0]:,.2f}")
+print(f"Semi-monthly Payment: ${payments[1]:,.2f}")
+print(f"Bi-weekly Payment: ${payments[2]:,.2f}")
+print(f"Weekly Payment: ${payments[3]:,.2f}")
+print(f"Rapid Bi-weekly Payment: ${payments[4]:,.2f}")
+print(f"Rapid Weekly Payment: ${payments[5]:,.2f}")
+
+# f string usage explained:
+
+# , - Add thousand separators (commas)
+
+# .2 - Show 2 decimal places
+
+# f - Format as floating point number
+
