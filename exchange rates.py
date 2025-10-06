@@ -1,36 +1,33 @@
 # Part 2: Exchange Rate Converter
-# Write a method/function (call it convert) that takes the amount and two currencies (USD or CAD) and converts from one currency to another using the exchange rate read from the file
 
 import csv
+# need this to read and use csv file
+# exr.csv is the same data file provided in the instructions, I just renamed it for ease of implentation
 
 class ExchangeRates:
 
     def __init__(self, filename):
-        self.filename = filename
+        # init the ExchangeRates class with data from exr
+        self.filename = filename #path to the file (exr.csv)
         self.usd_cad_rate = self._read_latest_rate()
     
     def _read_latest_rate(self):
-        #read the latest usd/cad exhcant rate from the csv file
-        try:
-            with open(self.filename, 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                rows = list(reader)
 
-                latest_rows = rows[-1]
-                usd_cad_rate = float(latest_rows['USD/CAD'])
-
-                return usd_cad_rate
-        except FileNotFoundError:
-            print(f"Error: File '{self.filename}' not found.")
-            return None
-        except KeyError:
-            print("Error: USD/CAD column not found in the file.")
-            return None
-        except ValueError:
-            print("Error: Invalid data format in USD/CAD column.")
-            return None
+        #read the latest usd/cad exchange rate from the csv file
         
+        with open(self.filename, 'r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            rows = list(reader)
+
+            latest_rows = rows[-1] #used to get the latest row, last -1 is where its located
+            usd_cad_rate = float(latest_rows['USD/CAD'])
+
+            return usd_cad_rate
+        # this part assumes user provides VALID inputs
+    
     def convert(self, amount, from_currency, to_currency):
+
+        # convert function able to do usd --> cad and vice versa
 
         if self.usd_cad_rate is None:
             return None
